@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>RIB — Homepage hero</title>
+    <link rel="stylesheet" href="styles/main.css" />
+  </head>
+  <body>
+    <header
+      class="site-nav site-nav--primary"
+      id="site-nav-primary"
+      data-component="Nav"
+      aria-label="Primary"
+    >
+      <div class="site-nav__surface site-nav__surface--primary">
+        <a class="site-nav__logo-link" href="#" aria-label="RIB home">
+          <img class="site-nav__logo" src="assets/logo.svg" width="108" height="40" alt="" />
+        </a>
+        <div class="site-nav__cluster">
+          <nav aria-label="Primary navigation">
+            <ul class="site-nav__links">
+              <li><a class="site-nav__link" href="#">Products</a></li>
+              <li><a class="site-nav__link" href="#">Services</a></li>
+              <li><a class="site-nav__link" href="#">Resources</a></li>
+              <li><a class="site-nav__link" href="#">About</a></li>
+            </ul>
+          </nav>
+          <button type="button" class="site-nav__cta">Get in touch</button>
+          <div class="site-nav__icons">
+            <button type="button" class="site-nav__icon-btn" aria-label="Search">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                <circle cx="11" cy="11" r="6.5" />
+                <path d="M16 16L20 20" stroke-linecap="round" />
+              </svg>
+            </button>
+            <button type="button" class="site-nav__icon-btn" aria-label="Account">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                <circle cx="12" cy="9.5" r="3.5" />
+                <path d="M5 20c.8-4 4.2-6 7-6s6.2 2 7 6" stroke-linecap="round" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <header
+      class="site-nav site-nav--fixed"
+      id="site-nav-fixed"
+      aria-label="Primary"
+      aria-hidden="true"
+    >
+      <div class="site-nav__surface site-nav__surface--pill">
+        <a class="site-nav__logo-link" href="#" aria-label="RIB home">
+          <img class="site-nav__logo" src="assets/logo.svg" width="108" height="40" alt="" />
+        </a>
+        <div class="site-nav__cluster">
+          <nav aria-label="Primary navigation">
+            <ul class="site-nav__links">
+              <li><a class="site-nav__link" href="#">Products</a></li>
+              <li><a class="site-nav__link" href="#">Services</a></li>
+              <li><a class="site-nav__link" href="#">Resources</a></li>
+              <li><a class="site-nav__link" href="#">About</a></li>
+            </ul>
+          </nav>
+          <button type="button" class="site-nav__cta">Get in touch</button>
+          <div class="site-nav__icons">
+            <button type="button" class="site-nav__icon-btn" aria-label="Search">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                <circle cx="11" cy="11" r="6.5" />
+                <path d="M16 16L20 20" stroke-linecap="round" />
+              </svg>
+            </button>
+            <button type="button" class="site-nav__icon-btn" aria-label="Account">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                <circle cx="12" cy="9.5" r="3.5" />
+                <path d="M5 20c.8-4 4.2-6 7-6s6.2 2 7 6" stroke-linecap="round" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__content">
+        <h1 id="hero-title" class="hero__title">
+          Patient simulators for real-world training disparities
+        </h1>
+        <p class="hero__body">
+          RIB designs advanced medical training manikins and wearable simulation technology that help healthcare educators deliver realistic, hands-on learning experiences for critical clinical skills.
+        </p>
+        <button type="button" class="hero__cta">Get in touch</button>
+      </div>
+
+      <!-- Layout matches Figma node 6088:16697 (Group 1036) -->
+      <div class="hero__visual">
+        <div class="hero__collage-scene">
+          <div class="hero__dots-wrap">
+            <img
+              class="hero__dots-img"
+              src="assets/dots.svg"
+              width="544"
+              height="480"
+              alt=""
+            />
+          </div>
+
+          <div class="hero__photo hero__photo--1">
+            <img src="assets/Frame%2037712.png" alt="" width="365" height="340" />
+          </div>
+          <div class="hero__photo hero__photo--2">
+            <img src="assets/Frame%2037713.png" alt="" width="267" height="267" />
+          </div>
+          <div class="hero__photo hero__photo--3">
+            <img src="assets/Frame%2037714.png" alt="" width="138" height="138" />
+          </div>
+          <div class="hero__photo hero__photo--4">
+            <img src="assets/Frame%2037717.png" alt="" width="195" height="195" />
+          </div>
+
+          <div class="hero__chip hero__chip--powder">
+            <img src="assets/Chip.svg" width="174" height="38" alt="" />
+          </div>
+          <div class="hero__chip hero__chip--coral">
+            <img src="assets/Chip1.svg" width="174" height="38" alt="" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="about" id="about" aria-labelledby="about-label">
+      <div class="about__inner">
+        <div class="about__media">
+          <img
+            src="assets/about-image.png"
+            alt="Medical training simulation with a manikin."
+          />
+        </div>
+        <div class="about__content">
+          <p id="about-label" class="about__eyebrow">About us</p>
+          <p class="about__text">
+            We believe medical simulation should prepare students for the full spectrum of patients they'll encounter in practice. So we work from real 3D scan data to build patient profiles that reflect who clinicians actually treat, bringing underrepresented populations into the training environment with realism and care.
+          </p>
+          <button type="button" class="about__cta">Learn more</button>
+        </div>
+      </div>
+    </section>
+
+    <script src="scripts/nav-scroll.js" defer></script>
+  </body>
+</html>
