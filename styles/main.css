@@ -17,6 +17,13 @@
 }
 
 :root {
+  /* Hero intro: --hero-line-count set by scripts/hero-headline-lines.js */
+  --hero-line-count: 3;
+  /* One line tick = stagger between line starts and each line’s duration (sequential) */
+  --hero-line-tick: 220ms;
+  --hero-fade-ms: 240ms;
+  --hero-cta-lag: 36ms;
+
   /* Brand — matches Figma variables in file */
   --color-wine-600: #682014;
   --color-wine-900: #3e130c;
@@ -28,6 +35,8 @@
   --color-nav-military: #191919;
   --color-nav-pill-surface: rgba(255, 255, 255, 0.88);
   --color-site-silver-01: #fbfbfb;
+  --color-cement-bg: #f0efe8;
+  --color-coral-400-text: #ffaa9a;
   --color-type-primary-dark: #060d34;
 
   /* Figma 6088:16697 collage artboard */
@@ -313,9 +322,30 @@ img {
   font-weight: 400;
   color: var(--color-coral-500);
   letter-spacing: -0.02em;
+  hyphens: none;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+/* After JS wraps measured lines — stacked blocks */
+.hero__title.hero__title--split {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+}
+
+.hero__title-word {
+  display: inline;
+}
+
+/* Lines stagger by index; tick = delay multiplier and duration (see :root) */
+.hero__title-line {
+  display: block;
   opacity: 0;
   transform: translateY(60px);
-  animation: hero-title-enter 700ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: hero-title-enter var(--hero-line-tick) cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: calc(var(--line-index, 0) * var(--hero-line-tick));
 }
 
 .hero__body {
@@ -327,8 +357,11 @@ img {
   color: var(--color-coral-200);
   max-width: 37.8125rem;
   opacity: 0;
-  animation: hero-fade-in 500ms ease-out forwards;
-  animation-delay: 700ms;
+}
+
+.hero--intro-ready .hero__body {
+  animation: hero-fade-in var(--hero-fade-ms) ease-out forwards;
+  animation-delay: calc(var(--hero-line-count) * var(--hero-line-tick));
 }
 
 .hero__cta {
@@ -350,24 +383,23 @@ img {
   text-transform: uppercase;
   cursor: pointer;
   opacity: 0;
-  animation: hero-fade-in 500ms ease-out forwards;
-  animation-delay: 800ms;
+}
+
+.hero--intro-ready .hero__cta {
+  animation: hero-fade-in var(--hero-fade-ms) ease-out forwards;
+  animation-delay: calc(var(--hero-line-count) * var(--hero-line-tick) + var(--hero-cta-lag));
 }
 
 .hero__cta:hover {
   filter: brightness(1.03);
 }
 
-/* Collage / imagery fades in after left-column type finishes (CTA: 800ms + 500ms fade) */
 .hero__visual {
   position: relative;
   display: flex;
   justify-content: flex-end;
   align-items: center;
   min-height: 35.0625rem;
-  opacity: 0;
-  animation: hero-fade-in 500ms ease-out forwards;
-  animation-delay: 1300ms;
 }
 
 /* Absolute layout — positions derived from Figma Group 1036 (6088:16697) */
@@ -472,12 +504,10 @@ img {
 
 .hero__chip--powder {
   animation: hero-chip-float-powder 19s ease-in-out infinite;
-  animation-delay: 1300ms;
 }
 
 .hero__chip--coral {
   animation: hero-chip-float-coral 16.5s ease-in-out infinite;
-  animation-delay: 1300ms;
 }
 
 @keyframes hero-chip-float-coral {
@@ -541,17 +571,156 @@ img {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero__title,
+  .hero__title-line,
   .hero__body,
-  .hero__cta,
-  .hero__visual {
-    animation: none;
+  .hero__cta {
+    animation: none !important;
     opacity: 1;
     transform: none;
   }
 
   .hero__chip--powder,
   .hero__chip--coral {
+    animation: none;
+  }
+}
+
+/* Services — Figma 6166:13175 */
+.services {
+  background: var(--color-cement-bg);
+  padding: clamp(3.75rem, 7vw, 5rem) var(--space-3xl) clamp(3rem, 5vw, 3.5rem);
+}
+
+.services__inner {
+  max-width: var(--screen-width);
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  width: 100%;
+}
+
+.services__header {
+  width: 100%;
+}
+
+.services__title {
+  margin: 0;
+  max-width: 72.3125rem;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.25vw, 2.5rem);
+  font-weight: 400;
+  line-height: clamp(2.375rem, 3.85vw, 3rem);
+  color: var(--color-type-primary-dark);
+}
+
+.services__cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  width: 100%;
+}
+
+.services__card {
+  flex: 1 1 17.5rem;
+  max-width: 27.4375rem;
+  min-width: min(100%, 16.5rem);
+  background: var(--color-wine-600);
+  border-radius: 1.875rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  overflow: hidden;
+}
+
+.services__shape {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-block: 1.25rem 1.375rem;
+  padding-inline: 1rem;
+  width: 100%;
+}
+
+.services__lottie {
+  width: 300px;
+  height: 300px;
+  max-width: min(300px, 82vw);
+  max-height: min(300px, 82vw);
+  flex-shrink: 0;
+}
+
+.services__lottie > *,
+.services__lottie svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.services__card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 0 1.5rem 2rem;
+}
+
+.services__card-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.375rem, 2vw, 1.75rem);
+  line-height: clamp(1.625rem, 2.35vw, 2rem);
+  font-weight: 400;
+  color: var(--color-coral-500);
+}
+
+.services__card-text {
+  margin: 0;
+  font-family: var(--font-paragraph);
+  font-size: var(--text-body);
+  line-height: 1.5rem;
+  font-weight: 400;
+  font-variation-settings: "wdth" 100;
+  color: var(--color-coral-400-text);
+}
+
+.services__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  padding-inline: var(--space-4xl);
+  padding-block: 0.6875rem;
+  border: none;
+  border-radius: var(--radius-pill);
+  background: var(--color-neon-400);
+  color: var(--color-nav-military);
+  font-family: var(--font-paragraph);
+  font-size: var(--text-caption);
+  line-height: var(--leading-caption);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.services__cta:hover {
+  filter: brightness(1.03);
+}
+
+/* No JS / scripting disabled: show content without motion */
+@media (scripting: none) {
+  .hero__body,
+  .hero__cta,
+  .hero__visual {
+    opacity: 1;
+    animation: none;
+  }
+
+  .hero__title-line {
+    opacity: 1;
+    transform: none;
     animation: none;
   }
 }
